@@ -1,0 +1,83 @@
+name: Release and Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: Get version from git
+      id: version
+      run: |
+        # Get version from git describe or use commit hash
+        VERSION=$(git describe --tags --always --dirty 2>/dev/null || echo "0.0.0-$(git rev-parse --short HEAD)")
+        VERSION=${VERSION#v}  # Remove leading 'v' if present
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+        echo "tag=v$VERSION" >> $GITHUB_OUTPUT
+        echo "Version: $VERSION"
+    
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version-file: go.mod
+    
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version-file: .nvmrc
+        cache: npm
+        cache-dependency-path: webapp/package-lock.json
+    
+    - name: Install webapp dependencies
+      run: cd webapp && npm ci
+    
+    - name: Build plugin
+      run: |
+        make dist
+        ls -la dist/
+    
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: plugin-bundle
+        path: dist/*.tar.gz
+
+    - name: Disable plugin on Mattermost server
+      continue-on-error: true
+      run: |
+        curl -f -X POST "${{ secrets.MM_URL }}/api/v4/plugins/com.mattermost.calls/disable" \
+          -H "Authorization: Bearer ${{ secrets.MM_ACCESS_TOKEN }}" \
+          -H "Content-Type: application/json" || echo "Plugin already disabled or not found"
+
+    - name: Upload plugin to Mattermost server
+      run: |
+        BUNDLE=$(ls dist/*.tar.gz | head -1)
+        echo "Uploading $BUNDLE to ${{ secrets.MM_URL }}..."
+        curl -f -X POST "${{ secrets.MM_URL }}/api/v4/plugins" \
+          -H "Authorization: Bearer ${{ secrets.MM_ACCESS_TOKEN }}" \
+          -F "plugin=@$BUNDLE" \
+          -F "force=true"
+
+    - name: Enable plugin on Mattermost server
+      run: |
+        curl -f -X POST "${{ secrets.MM_URL }}/api/v4/plugins/com.mattermost.calls/enable" \
+          -H "Authorization: Bearer ${{ secrets.MM_ACCESS_TOKEN }}" \
+          -H "Content-Type: application/json"
+
+    - name: Deployment Summary
+      run: |
+        echo "## Plugin Deployed! 🎉" >> $GITHUB_STEP_SUMMARY
+        echo "- **Version:** ${{ steps.version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Plugin ID:** com.mattermost.calls" >> $GITHUB_STEP_SUMMARY
+        echo "- **Status:** ✅ Enabled" >> $GITHUB_STEP_SUMMARY
