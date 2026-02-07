@@ -1077,7 +1077,7 @@ export default class Plugin {
             if (currentCallChannelID) {
                 if (wsClient) {
                     logDebug('requesting call state through ws');
-                    wsClient.sendMessage('custom_com.mattermost.calls_call_state', {channelID: currentCallChannelID});
+                    wsClient.sendMessage('custom_com.fambear.calls_call_state', {channelID: currentCallChannelID});
                 } else {
                     logErr('unexpected missing wsClient');
                 }
