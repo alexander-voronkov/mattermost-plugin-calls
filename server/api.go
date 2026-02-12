@@ -313,10 +313,9 @@ func (p *Plugin) handleServeStandalone(w http.ResponseWriter, r *http.Request) {
 
 			// Allow same-origin referrers
 		} else {
-			// No referrer - could be direct navigation (OK) or malicious site with referrer policy
-			p.LogWarn("Serve standalone, BLOCKED: no referrer")
-			http.Error(w, "Forbidden", http.StatusForbidden)
-			return
+			// No referrer - direct navigation is OK (pop-out windows, bookmarks, etc.)
+			// This is safe because the standalone page requires authentication via cookies
+			p.LogDebug("Serve standalone: allowing request without referrer (direct navigation)")
 		}
 	}
 
