@@ -31,7 +31,7 @@ describe('TCPServerAddress', () => {
 
     const renderComponent = (props = {}, storeOverrides = {}) => {
         const store = mockStore({
-            'plugins-com.fambear.calls': {
+            'plugins-com.mattermost.calls': {
                 callsConfig: {
                     TCPServerAddress: '0.0.0.0',
                 },
@@ -83,7 +83,7 @@ describe('TCPServerAddress', () => {
 
     it('should be disabled when RTCD is enabled', () => {
         renderComponent({}, {
-            'plugins-com.fambear.calls': {
+            'plugins-com.mattermost.calls': {
                 callsConfig: {
                     TCPServerAddress: '0.0.0.0',
                 },
@@ -99,7 +99,7 @@ describe('TCPServerAddress', () => {
 
     it('should show environment override warning when setting is overridden', () => {
         renderComponent({}, {
-            'plugins-com.fambear.calls': {
+            'plugins-com.mattermost.calls': {
                 callsConfig: {
                     TCPServerAddress: '0.0.0.0',
                 },

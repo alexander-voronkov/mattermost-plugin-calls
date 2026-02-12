@@ -31,7 +31,7 @@ describe('ICEServersConfigs', () => {
 
     const renderComponent = (props = {}, storeOverrides = {}) => {
         const store = mockStore({
-            'plugins-com.fambear.calls': {
+            'plugins-com.mattermost.calls': {
                 callsConfig: {
                     ICEServersConfigs: [],
                 },
@@ -84,7 +84,7 @@ describe('ICEServersConfigs', () => {
 
     it('should show environment override warning when setting is overridden', () => {
         renderComponent({}, {
-            'plugins-com.fambear.calls': {
+            'plugins-com.mattermost.calls': {
                 callsConfig: {
                     ICEServersConfigs: [{urls: ['stun:stun.example.com:3478']}],
                 },

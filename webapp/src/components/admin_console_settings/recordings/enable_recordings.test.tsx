@@ -31,7 +31,7 @@ describe('EnableRecordings', () => {
 
     const renderComponent = (props = {}, storeOverrides = {}) => {
         const store = mockStore({
-            'plugins-com.fambear.calls': {
+            'plugins-com.mattermost.calls': {
                 callsConfig: {
                     EnableRecordings: true,
                 },
@@ -61,7 +61,7 @@ describe('EnableRecordings', () => {
 
     it('should render correctly with default value', () => {
         const store = mockStore({
-            'plugins-com.fambear.calls': {
+            'plugins-com.mattermost.calls': {
                 callsConfig: {
                     EnableRecordings: true,
                 },
@@ -112,7 +112,7 @@ describe('EnableRecordings', () => {
 
     it('should handle overridden false value correctly', () => {
         renderComponent({}, {
-            'plugins-com.fambear.calls': {
+            'plugins-com.mattermost.calls': {
                 callsConfig: {
                     EnableRecordings: false,
                 },
@@ -155,7 +155,7 @@ describe('EnableRecordings', () => {
 
     it('should show environment override warning when setting is overridden', () => {
         renderComponent({}, {
-            'plugins-com.fambear.calls': {
+            'plugins-com.mattermost.calls': {
                 callsConfig: {
                     EnableRecordings: true,
                 },
@@ -172,7 +172,7 @@ describe('EnableRecordings', () => {
 
     it('should not render on cloud', () => {
         renderComponent({}, {
-            'plugins-com.fambear.calls': {
+            'plugins-com.mattermost.calls': {
                 callsConfig: {
                     EnableRecordings: true,
                 },

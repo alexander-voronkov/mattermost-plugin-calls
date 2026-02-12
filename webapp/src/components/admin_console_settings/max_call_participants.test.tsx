@@ -31,7 +31,7 @@ describe('MaxCallParticipants', () => {
 
     const renderComponent = (props = {}, storeOverrides = {}) => {
         const store = mockStore({
-            'plugins-com.fambear.calls': {
+            'plugins-com.mattermost.calls': {
                 callsConfig: {
                     MaxCallParticipants: 10,
                 },
@@ -84,7 +84,7 @@ describe('MaxCallParticipants', () => {
 
     it('should show environment override warning when setting is overridden', () => {
         renderComponent({}, {
-            'plugins-com.fambear.calls': {
+            'plugins-com.mattermost.calls': {
                 callsConfig: {
                     MaxCallParticipants: 10,
                 },

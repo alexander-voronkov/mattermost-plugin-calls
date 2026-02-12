@@ -79,14 +79,14 @@ func TestMigrate(t *testing.T) {
 
 			t.Run("non-empty pluginkeyvaluestore", func(t *testing.T) {
 				_, err := store.wDB.Exec(`INSERT INTO pluginkeyvaluestore (pluginid, pkey, pvalue) VALUES 
-				('com.fambear.calls', 'config', '{}'),
-				('com.fambear.calls', '00000000000000000000000001', NULL),
-				('com.fambear.calls', '00000000000000000000000002', '{}'),
-				('com.fambear.calls', '00000000000000000000000003', '{"enabled": null}'),
-				('com.fambear.calls', '00000000000000000000000004', '{"enabled": true}'),
-				('com.fambear.calls', '00000000000000000000000005', '{"enabled": false}'),
-				('com.fambear.calls', '00000000000000000000000006', '{"enabled": false}'),
-				('com.fambear.calls', '00000000000000000000000007', '{"enabled": true}')
+				('com.mattermost.calls', 'config', '{}'),
+				('com.mattermost.calls', '00000000000000000000000001', NULL),
+				('com.mattermost.calls', '00000000000000000000000002', '{}'),
+				('com.mattermost.calls', '00000000000000000000000003', '{"enabled": null}'),
+				('com.mattermost.calls', '00000000000000000000000004', '{"enabled": true}'),
+				('com.mattermost.calls', '00000000000000000000000005', '{"enabled": false}'),
+				('com.mattermost.calls', '00000000000000000000000006', '{"enabled": false}'),
+				('com.mattermost.calls', '00000000000000000000000007', '{"enabled": true}')
 				`)
 				require.NoError(t, err)
 
@@ -207,14 +207,14 @@ func TestMigrate(t *testing.T) {
 
 		t.Run("non-empty pluginkeyvaluestore", func(t *testing.T) {
 			_, err := store.wDB.Exec(`INSERT INTO PluginKeyValueStore (PluginId, PKey, PValue) VALUES 
-				('com.fambear.calls', 'config', '{}'),
-				('com.fambear.calls', '00000000000000000000000001', NULL),
-				('com.fambear.calls', '00000000000000000000000002', '{}'),
-				('com.fambear.calls', '00000000000000000000000003', '{"enabled": null}'),
-				('com.fambear.calls', '00000000000000000000000004', '{"enabled": true}'),
-				('com.fambear.calls', '00000000000000000000000005', '{"enabled": false}'),
-				('com.fambear.calls', '00000000000000000000000006', '{"enabled": false}'),
-				('com.fambear.calls', '00000000000000000000000007', '{"enabled": true}')
+				('com.mattermost.calls', 'config', '{}'),
+				('com.mattermost.calls', '00000000000000000000000001', NULL),
+				('com.mattermost.calls', '00000000000000000000000002', '{}'),
+				('com.mattermost.calls', '00000000000000000000000003', '{"enabled": null}'),
+				('com.mattermost.calls', '00000000000000000000000004', '{"enabled": true}'),
+				('com.mattermost.calls', '00000000000000000000000005', '{"enabled": false}'),
+				('com.mattermost.calls', '00000000000000000000000006', '{"enabled": false}'),
+				('com.mattermost.calls', '00000000000000000000000007', '{"enabled": true}')
 				`)
 			require.NoError(t, err)
 

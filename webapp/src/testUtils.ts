@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 
 export const mockStore = (initialState = {}) => {
     const reducer = combineReducers({
-        'plugins-com.fambear.calls': (state = {}) => state,
+        'plugins-com.mattermost.calls': (state = {}) => state,
         entities: (state = {}) => state,
     });
 

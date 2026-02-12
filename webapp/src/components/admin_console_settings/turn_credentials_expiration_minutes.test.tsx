@@ -31,7 +31,7 @@ describe('TURNCredentialsExpirationMinutes', () => {
 
     const renderComponent = (props = {}, storeOverrides = {}) => {
         const store = mockStore({
-            'plugins-com.fambear.calls': {
+            'plugins-com.mattermost.calls': {
                 callsConfig: {
                     TURNCredentialsExpirationMinutes: 60,
                 },
@@ -82,7 +82,7 @@ describe('TURNCredentialsExpirationMinutes', () => {
 
     it('should show environment override warning when setting is overridden', () => {
         renderComponent({}, {
-            'plugins-com.fambear.calls': {
+            'plugins-com.mattermost.calls': {
                 callsConfig: {
                     TURNCredentialsExpirationMinutes: 60,
                 },

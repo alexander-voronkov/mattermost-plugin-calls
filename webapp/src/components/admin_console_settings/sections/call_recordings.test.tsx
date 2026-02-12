@@ -24,7 +24,7 @@ describe('CallRecordingsSection', () => {
 
     const renderComponent = (storeOverrides = {}) => {
         const store = mockStore({
-            'plugins-com.fambear.calls': {
+            'plugins-com.mattermost.calls': {
                 callsConfig: {},
             },
             entities: {

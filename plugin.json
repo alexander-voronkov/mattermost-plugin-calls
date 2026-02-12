@@ -1,5 +1,5 @@
 {
-  "id": "com.fambear.calls",
+  "id": "com.mattermost.calls",
   "name": "Calls (FamBear)",
   "description": "Integrates real-time voice communication in Mattermost",
   "version": "1.12.0",

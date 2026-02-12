@@ -626,7 +626,7 @@ export default class ExpandedView extends React.PureComponent<Props, State> {
         // making a potentially racy HTTP call and should guarantee
         // a consistent state.
         logDebug('requesting call state through ws');
-        this.context.sendMessage('custom_com.fambear.calls_call_state', {channelID: callsClient.channelID});
+        this.context.sendMessage('custom_com.mattermost.calls_call_state', {channelID: callsClient.channelID});
     };
 
     public componentDidMount() {

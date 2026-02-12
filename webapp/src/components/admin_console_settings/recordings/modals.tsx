@@ -32,7 +32,7 @@ export const OnPremTrialSuccess = (modalProps: Props) => {
             id={IDOnPremTrialSuccess}
             {...modalProps}
             confirmButtonText={formatMessage({defaultMessage: 'Set up call recordings'})}
-            handleConfirm={() => navigateToURL('/admin_console/plugins/plugin_com.fambear.calls')}
+            handleConfirm={() => navigateToURL('/admin_console/plugins/plugin_com.mattermost.calls')}
             onHide={() => null}
         >
             <HandsSvg

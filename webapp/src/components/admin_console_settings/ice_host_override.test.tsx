@@ -31,7 +31,7 @@ describe('ICEHostOverride', () => {
 
     const renderComponent = (props = {}, storeOverrides = {}) => {
         const store = mockStore({
-            'plugins-com.fambear.calls': {
+            'plugins-com.mattermost.calls': {
                 callsConfig: {
                     ICEHostOverride: '192.168.1.1',
                 },
@@ -83,7 +83,7 @@ describe('ICEHostOverride', () => {
 
     it('should be disabled when RTCD is enabled', () => {
         renderComponent({}, {
-            'plugins-com.fambear.calls': {
+            'plugins-com.mattermost.calls': {
                 callsConfig: {
                     ICEHostOverride: '192.168.1.1',
                 },
@@ -99,7 +99,7 @@ describe('ICEHostOverride', () => {
 
     it('should show environment override warning when setting is overridden', () => {
         renderComponent({}, {
-            'plugins-com.fambear.calls': {
+            'plugins-com.mattermost.calls': {
                 callsConfig: {
                     ICEHostOverride: '192.168.1.1',
                 },
