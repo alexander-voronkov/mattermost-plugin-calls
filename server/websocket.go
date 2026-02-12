@@ -790,6 +790,33 @@ func (p *Plugin) handleJoin(userID, connID, authSessionID string, joinData calls
 				"owner_id":  state.Call.OwnerID,
 				"host_id":   state.Call.GetHostID(),
 			}, &WebSocketBroadcast{ChannelID: channelID, ReliableClusterSend: true})
+		} else if len(state.sessions) == 2 {
+			// Second participant joined - start auto-recording if enabled
+			cfg := p.getConfiguration()
+			if cfg.autoRecordingEnabled() && state.Recording == nil {
+				p.LogDebug("auto-recording: starting recording as 2nd participant joined",
+					"callID", state.Call.ID, "channelID", channelID)
+				go func(callID, ownerID string) {
+					// Small delay to ensure call is fully established
+					time.Sleep(1 * time.Second)
+					state, err := p.lockCallReturnState(callID)
+					if err != nil {
+						p.LogError("auto-recording: failed to lock call", "err", err.Error())
+						return
+					}
+					defer p.unlockCall(callID)
+					if state == nil || state.Recording != nil {
+						p.LogDebug("auto-recording: call ended or recording already started")
+						return
+					}
+					_, _, err = p.startRecordingJob(state, callID, ownerID)
+					if err != nil {
+						p.LogError("auto-recording: failed to start recording", "err", err.Error())
+					} else {
+						p.LogDebug("auto-recording: recording started successfully", "callID", callID)
+					}
+				}(state.Call.ID, state.Call.OwnerID)
+			}
 		}
 
 		p.LogDebug("session has joined call",

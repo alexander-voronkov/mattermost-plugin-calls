@@ -231,6 +231,13 @@
             "help_text": "(Optional) When set to true, call recordings are enabled."
           },
           {
+            "key": "EnableAutoRecording",
+            "display_name": "Enable automatic call recording",
+            "type": "bool",
+            "default": false,
+            "help_text": "When set to true, all calls will be automatically recorded when 2 or more participants join. Recording continues until the call ends."
+          },
+          {
             "key": "JobServiceURL",
             "display_name": "Job service URL",
             "type": "text",
@@ -535,6 +542,13 @@
         "type": "bool",
         "default": false,
         "help_text": "(Optional) When set to true, call recordings are enabled."
+      },
+      {
+        "key": "EnableAutoRecording",
+        "display_name": "Enable automatic call recording",
+        "type": "bool",
+        "default": false,
+        "help_text": "When set to true, all calls will be automatically recorded when 2 or more participants join. Recording continues until the call ends."
       },
       {
         "key": "JobServiceURL",

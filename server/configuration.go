@@ -117,6 +117,8 @@ type ClientConfig struct {
 	AllowScreenSharing *bool
 	// When set to true it enables the call recordings functionality
 	EnableRecordings *bool
+	// When set to true it enables automatic recording of all calls (starts when 2+ participants)
+	EnableAutoRecording *bool
 	// When set to true it enables the call transcriptions functionality
 	EnableTranscriptions *bool
 	// When set to true it enables the live captions functionality
@@ -491,6 +493,10 @@ func (c *configuration) recordingsEnabled() bool {
 		return true
 	}
 	return false
+}
+
+func (c *configuration) autoRecordingEnabled() bool {
+	return c.recordingsEnabled() && c.EnableAutoRecording != nil && *c.EnableAutoRecording
 }
 
 func (c *configuration) transcriptionsEnabled() bool {
